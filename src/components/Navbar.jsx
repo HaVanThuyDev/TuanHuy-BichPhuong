@@ -33,17 +33,26 @@ export default function Navbar({ onOpenGiftModal }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo / Couple Initials */}
         <a href="#home" className="flex items-center gap-2 group">
-          <span className={`font-cursive text-2xl sm:text-3xl transition-colors ${
-            isScrolled ? 'text-rose-600' : 'text-white'
+          <Heart className={`w-4 h-4 text-rose-500 fill-rose-500 transition-opacity ${
+            isScrolled ? 'opacity-100 animate-pulse' : 'opacity-90'
+          }`} />
+          <div className={`transition-all duration-300 ${
+            isScrolled
+              ? 'opacity-100 translate-x-0'
+              : 'opacity-0 -translate-x-2 pointer-events-none sm:opacity-100 sm:translate-x-0 sm:pointer-events-auto'
           }`}>
-            Tuấn Huy
-          </span>
-          <Heart className="w-4 h-4 text-rose-500 fill-rose-500 animate-pulse" />
-          <span className={`font-cursive text-2xl sm:text-3xl transition-colors ${
-            isScrolled ? 'text-rose-600' : 'text-white'
-          }`}>
-            Bích Phương
-          </span>
+            <span className={`font-cursive text-2xl sm:text-3xl transition-colors ${
+              isScrolled ? 'text-rose-600' : 'text-white'
+            }`}>
+              Tuấn Huy
+            </span>
+            <span className="mx-1 text-amber-300 font-serif">&</span>
+            <span className={`font-cursive text-2xl sm:text-3xl transition-colors ${
+              isScrolled ? 'text-rose-600' : 'text-white'
+            }`}>
+              Bích Phương
+            </span>
+          </div>
         </a>
 
         {/* Desktop Navigation */}

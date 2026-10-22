@@ -1,29 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Music, Play, Pause, ListMusic, Plus, X, Disc3, ExternalLink, Volume2, VolumeX } from 'lucide-react';
+import { Music, Play, Pause, ListMusic, X, Disc3, Check } from 'lucide-react';
 import { weddingData } from '../data/weddingData';
 
 export default function MusicPlayer() {
+  const songs = weddingData.youtubePresets;
   const [isPlaying, setIsPlaying] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
-  const [customUrl, setCustomUrl] = useState('');
-  const [playlist, setPlaylist] = useState(weddingData.youtubePresets);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0); // Default Wedding Song (index 0)
   const [hasInteracted, setHasInteracted] = useState(false);
-  const [activeTab, setActiveTab] = useState('mp3'); // 'mp3' (offline direct audio) | 'youtube'
 
   const audioRef = useRef(null);
+  const currentSong = songs[currentSongIndex] || songs[0];
 
-  const currentSong = playlist[currentSongIndex] || playlist[0];
-
-  // Helper to extract YouTube ID
-  const extractYouTubeId = (url) => {
-    if (!url) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : url.trim();
+  // Change song and play directly on website
+  const handleSelectSong = (index) => {
+    setCurrentSongIndex(index);
+    if (audioRef.current) {
+      audioRef.current.src = songs[index].src;
+      audioRef.current.play()
+        .then(() => setIsPlaying(true))
+        .catch((err) => console.log('Playback error:', err));
+    }
   };
 
-  // Toggle Play / Pause using native HTML5 Audio (Guaranteed to work on iOS/Android/Messenger)
+  // Toggle Play / Pause using native HTML5 Audio
   const togglePlay = () => {
     if (!audioRef.current) return;
 
@@ -38,7 +38,7 @@ export default function MusicPlayer() {
     setHasInteracted(true);
   };
 
-  // Auto-play on first user interaction (touch/click anywhere)
+  // Auto-play on first user touch/click anywhere on page
   useEffect(() => {
     const handleFirstTouch = () => {
       if (!hasInteracted && audioRef.current) {
@@ -47,9 +47,7 @@ export default function MusicPlayer() {
             setIsPlaying(true);
             setHasInteracted(true);
           })
-          .catch(() => {
-            // Browser might still block until explicit button tap
-          });
+          .catch(() => {});
       }
     };
 
@@ -62,42 +60,26 @@ export default function MusicPlayer() {
     };
   }, [hasInteracted]);
 
-  // Handle adding custom YouTube song
-  const handleAddCustomSong = (e) => {
-    e.preventDefault();
-    const id = extractYouTubeId(customUrl);
-    if (!id) {
-      alert('Vui lòng nhập đường link YouTube hợp lệ!');
-      return;
-    }
-    const newSong = {
-      id,
-      title: `Nhạc YouTube yêu thích (${id.substring(0, 5)}...)`,
-      artist: 'Người dùng tùy chọn'
-    };
-    const updated = [newSong, ...playlist];
-    setPlaylist(updated);
-    setCurrentSongIndex(0);
-    setCustomUrl('');
-    // Open directly in youtube
-    window.open(`https://www.youtube.com/watch?v=${id}`, '_blank');
-  };
-
   return (
     <>
-      {/* Native HTML5 Audio Element: 100% reliable on mobile browsers, Messenger, Zalo */}
+      {/* Native HTML5 Audio Element: Plays directly on web, works 100% on iOS / Android / Messenger */}
       <audio
         ref={audioRef}
-        src="/music/wedding-song.mp3"
+        src={currentSong.src}
         loop
         preload="auto"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
+        onEnded={() => {
+          // Play next song in playlist automatically
+          const nextIndex = (currentSongIndex + 1) % songs.length;
+          handleSelectSong(nextIndex);
+        }}
       />
 
-      {/* Floating Music Controller (Placed above Mobile Bottom Nav) */}
+      {/* Floating Music Controller (Above Mobile Bottom Nav) */}
       <div className="fixed bottom-20 sm:bottom-6 right-3 sm:right-6 z-40 flex items-center gap-2">
-        {/* Song info pill */}
+        {/* Song info pill (Desktop/Tablet) */}
         <div 
           onClick={() => setShowModal(true)}
           className={`cursor-pointer hidden sm:flex items-center gap-2.5 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-full border border-rose-200 shadow-xl transition-all duration-300 hover:scale-105 ${
@@ -110,7 +92,7 @@ export default function MusicPlayer() {
             <span className={`w-1 h-2 bg-rose-500 rounded-full ${isPlaying ? 'animate-bounce' : ''}`} style={{ animationDelay: '300ms' }}></span>
           </div>
           <div className="text-left text-xs max-w-[140px] truncate">
-            <p className="font-semibold text-rose-900 truncate">Nhạc Cưới Lãng Mạn</p>
+            <p className="font-semibold text-rose-900 truncate">{currentSong.title}</p>
             <p className="text-stone-500 text-[10px]">{isPlaying ? 'Đang phát' : 'Chạm để bật'}</p>
           </div>
         </div>
@@ -146,10 +128,10 @@ export default function MusicPlayer() {
           </button>
         </div>
 
-        {/* Playlist & YouTube Links Button */}
+        {/* Playlist Button */}
         <button
           onClick={() => setShowModal(true)}
-          title="Chọn bài hát / Mở YouTube"
+          title="Chọn bài hát đám cưới"
           className="p-2 sm:p-2.5 rounded-full bg-white/95 hover:bg-white text-rose-700 shadow-lg backdrop-blur-md border border-rose-200 transition-all active:scale-95"
           aria-label="Danh sách bài hát"
         >
@@ -157,17 +139,17 @@ export default function MusicPlayer() {
         </button>
       </div>
 
-      {/* Playlist & YouTube Music Modal */}
+      {/* Playlist Modal (3 Songs Only, Plays directly on Web) */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fade-in">
-          <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-rose-100 overflow-hidden transform transition-all max-h-[90dvh] flex flex-col">
+          <div className="bg-white rounded-3xl max-w-sm w-full shadow-2xl border border-rose-100 overflow-hidden transform transition-all flex flex-col">
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-rose-600 to-rose-700 p-4 sm:p-5 text-white flex items-center justify-between flex-shrink-0">
+            <div className="bg-gradient-to-r from-rose-600 to-rose-700 p-4 text-white flex items-center justify-between flex-shrink-0">
               <div className="flex items-center gap-2">
-                <Disc3 className="w-6 h-6 animate-spin-slow text-amber-300" />
+                <Disc3 className="w-5 h-5 animate-spin-slow text-amber-300" />
                 <div>
-                  <h3 className="font-serif font-bold text-base sm:text-lg">Âm Nhạc Lễ Cưới</h3>
-                  <p className="text-[11px] sm:text-xs text-rose-100">Bật nhạc nền hoặc nghe trực tiếp trên YouTube</p>
+                  <h3 className="font-serif font-bold text-base text-white">Âm Nhạc Lễ Cưới</h3>
+                  <p className="text-[11px] text-rose-100">Chọn bài hát để phát trực tiếp</p>
                 </div>
               </div>
               <button
@@ -179,94 +161,77 @@ export default function MusicPlayer() {
               </button>
             </div>
 
-            {/* Primary Background Player Controls */}
-            <div className="p-4 bg-rose-50/60 border-b border-rose-100 flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-full bg-rose-600 text-white flex items-center justify-center shadow">
-                  <Music className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-xs text-stone-900">Bản Nhạc Cưới Lãng Mạn (MP3)</h4>
-                  <p className="text-[11px] text-stone-500">
-                    {isPlaying ? '🎵 Đang phát nhạc nền' : '⏸ Đang tạm dừng'}
-                  </p>
-                </div>
-              </div>
+            {/* 3 Songs Selection List (Direct playback on click) */}
+            <div className="p-4 space-y-2.5">
+              {songs.map((song, idx) => {
+                const isSelected = idx === currentSongIndex;
+                const isSongPlaying = isSelected && isPlaying;
 
-              <button
-                onClick={togglePlay}
-                className="px-3 py-1.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold shadow-sm active:scale-95 transition-all flex items-center gap-1.5"
-              >
-                {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                <span>{isPlaying ? 'Tạm Dừng' : 'Phát Nhạc'}</span>
-              </button>
-            </div>
-
-            {/* YouTube Wedding Playlist (Direct Links for Mobile) */}
-            <div className="p-4 space-y-2 overflow-y-auto no-scrollbar flex-1">
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="text-[11px] uppercase tracking-wider font-bold text-stone-400">
-                  Nghe trực tiếp trên YouTube:
-                </h4>
-                <span className="text-[10px] text-rose-600 font-medium">Chạm bài hát để mở nghe ↗</span>
-              </div>
-
-              <div className="space-y-2">
-                {playlist.map((song) => (
-                  <a
+                return (
+                  <div
                     key={song.id}
-                    href={`https://www.youtube.com/watch?v=${song.id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 rounded-2xl flex items-center justify-between border border-stone-200/80 hover:border-rose-300 hover:bg-rose-50/50 transition-all group bg-white shadow-sm"
+                    onClick={() => {
+                      if (isSelected) {
+                        togglePlay();
+                      } else {
+                        handleSelectSong(idx);
+                      }
+                    }}
+                    className={`p-3 rounded-2xl flex items-center justify-between cursor-pointer transition-all border ${
+                      isSelected
+                        ? 'bg-rose-50 border-rose-300 shadow-sm'
+                        : 'bg-stone-50/70 border-stone-200/70 hover:bg-rose-50/40 hover:border-rose-200'
+                    }`}
                   >
                     <div className="flex items-center gap-3 truncate">
-                      <div className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                        <Play className="w-3.5 h-3.5 fill-red-600 text-red-600 translate-x-0.5" />
+                      {/* Song Icon / Playing Animation */}
+                      <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
+                        isSelected
+                          ? 'bg-rose-600 text-white shadow-md'
+                          : 'bg-white text-stone-600 border border-stone-200'
+                      }`}>
+                        {isSongPlaying ? (
+                          <Pause className="w-4 h-4 fill-white" />
+                        ) : (
+                          <Play className="w-4 h-4 fill-current translate-x-0.5" />
+                        )}
                       </div>
-                      <div className="truncate text-xs">
-                        <p className="font-semibold text-stone-800 group-hover:text-rose-700 truncate">{song.title}</p>
-                        <p className="text-[10px] text-stone-400">{song.artist}</p>
+
+                      <div className="truncate">
+                        <p className={`text-xs font-bold truncate ${
+                          isSelected ? 'text-rose-700' : 'text-stone-800'
+                        }`}>
+                          {song.title}
+                        </p>
+                        <p className="text-[11px] text-stone-500">{song.artist}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1 text-[11px] text-stone-400 group-hover:text-rose-600 font-medium flex-shrink-0 ml-2">
-                      <span>YouTube</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
+                    {/* Status badge */}
+                    <div className="flex-shrink-0 ml-2">
+                      {isSongPlaying ? (
+                        <div className="flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-semibold">
+                          <span className="w-1 h-2.5 bg-rose-600 rounded-full animate-bounce"></span>
+                          <span className="w-1 h-3.5 bg-rose-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                          <span className="w-1 h-2 bg-rose-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                          <span className="ml-1">Đang phát</span>
+                        </div>
+                      ) : isSelected ? (
+                        <span className="text-[10px] font-medium text-stone-500 bg-stone-100 px-2 py-0.5 rounded-full">
+                          Đã chọn
+                        </span>
+                      ) : null}
                     </div>
-                  </a>
-                ))}
-              </div>
-
-              {/* Add Custom YouTube Link Form */}
-              <div className="pt-3 mt-3 border-t border-stone-200">
-                <h4 className="text-[11px] uppercase tracking-wider font-bold text-stone-400 mb-2">
-                  Hoặc dán link bài hát YouTube của bạn:
-                </h4>
-                <form onSubmit={handleAddCustomSong} className="flex gap-2">
-                  <input
-                    type="text"
-                    value={customUrl}
-                    onChange={(e) => setCustomUrl(e.target.value)}
-                    placeholder="VD: https://youtu.be/..."
-                    className="flex-1 text-xs px-3 py-2.5 rounded-xl border border-stone-200 focus:outline-none focus:border-rose-500 bg-stone-50"
-                  />
-                  <button
-                    type="submit"
-                    className="px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-amber-600 text-white text-xs font-semibold flex items-center gap-1 shadow-sm active:scale-95"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    <span>Mở Nghe</span>
-                  </button>
-                </form>
-              </div>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Modal Footer */}
-            <div className="bg-stone-50 p-3 text-center border-t border-stone-200 flex-shrink-0">
+            <div className="bg-stone-50 p-3 text-center border-t border-stone-200">
               <button
                 onClick={() => setShowModal(false)}
-                className="w-full py-2.5 rounded-xl bg-stone-800 hover:bg-stone-900 text-white text-xs font-medium active:scale-95"
+                className="w-full py-2.5 rounded-xl bg-stone-800 hover:bg-stone-900 text-white text-xs font-semibold active:scale-95 transition-all"
               >
                 Đóng Lại
               </button>

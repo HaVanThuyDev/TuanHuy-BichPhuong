@@ -126,29 +126,22 @@ export const weddingData = {
   }),
   youtubePresets: [
     {
-      id: "04WFKh9NP-E",
-      title: "I Do - 911 (Wedding Song)",
-      artist: "911 Band"
+      id: "WHsSBzS01JU",
+      title: "Wedding Song",
+      artist: "Nhạc Cưới Lãng Mạn",
+      src: "/music/wedding-song.m4a"
     },
     {
-      id: "W_fQY7E4w1k",
-      title: "Ngày Đầu Tiên - Đức Phúc",
-      artist: "Đức Phúc"
+      id: "rIXhXaQ8tiM",
+      title: "Ngày Đầu Tiên",
+      artist: "Đức Phúc",
+      src: "/music/ngay-dau-tien.m4a"
     },
     {
-      id: "cbbJj7Fq5F4",
-      title: "Ánh Nắng Của Anh",
-      artist: "Đức Phúc"
-    },
-    {
-      id: "shL1vjQ2_3Q",
-      title: "Cưới Nhau Đi (Yes I Do)",
-      artist: "Bùi Anh Tuấn & Hiền Hồ"
-    },
-    {
-      id: "gxEPV4kolz0",
-      title: "Until I Found You",
-      artist: "Stephen Sanchez"
+      id: "IgNPxcLfHM8",
+      title: "Công Viên Lãng Mạn (Lãm Làng)",
+      artist: "Nhạc Cưới Ngọt Ngào",
+      src: "/music/cong-vien-lang-man.m4a"
     }
   ],
   defaultWishes: [

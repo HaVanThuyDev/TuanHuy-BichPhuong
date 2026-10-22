@@ -31,34 +31,34 @@ export default function Hero() {
               idx === currentSlide ? 'animate-kenburns' : ''
             }`}
           />
-          {/* Subtle gradient: only dark at the very top for header contrast, completely clear in center/bottom to see faces */}
-          <div className="absolute inset-0 bg-gradient-to-b from-stone-950/80 via-transparent to-stone-950/75 pointer-events-none" />
+          {/* Subtle gradient vignette: very light on top so faces are crystal clear, gentle gradient at the bottom for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-900/10 to-stone-950/40 pointer-events-none" />
         </div>
       ))}
 
-      {/* Top Section: Invitation Title & Couple Names (Kept at top so face is 100% visible) */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 text-center text-white pt-24 sm:pt-28 flex flex-col items-center">
-        {/* Invitation Subtitle */}
-        <p className="font-alex text-2xl sm:text-3xl text-rose-200 tracking-wide mb-1 font-normal drop-shadow-md animate-fade-in">
+      {/* Top Area: Completely empty & transparent so faces of bride & groom are 100% visible */}
+      <div className="h-28 sm:h-32 pointer-events-none"></div>
+
+      {/* Circled Red Area: Placed at waist/lower-middle of photo */}
+      <div className="relative z-10 max-w-2xl mx-auto px-4 text-center text-white my-auto flex flex-col items-center">
+        {/* Invitation text */}
+        <p className="font-alex text-xl sm:text-2xl text-rose-200 tracking-wide mb-1 font-normal drop-shadow">
           Trân trọng kính mời tới dự lễ cưới của
         </p>
 
-        {/* Couple Names - Elegant & Clean */}
-        <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-cursive font-normal text-rose-50 text-shadow-lg tracking-wide leading-tight">
+        {/* Couple Names - Placed exactly in the circled area */}
+        <h1 className="text-4xl xs:text-5xl sm:text-6xl font-cursive font-normal text-rose-50 text-shadow-lg tracking-wide leading-tight">
           Tuấn Huy
-          <span className="inline-block mx-2 sm:mx-3 text-amber-300 font-serif text-2xl sm:text-5xl">&</span>
+          <span className="inline-block mx-2.5 text-amber-300 font-serif text-2xl sm:text-4xl">&</span>
           Bích Phương
         </h1>
 
-        <p className="font-serif italic text-xs sm:text-sm text-stone-200 tracking-wider font-light mt-1 text-shadow">
+        <p className="font-serif italic text-xs sm:text-sm text-stone-200 tracking-wider font-light mt-1.5 text-shadow">
           "Hạnh phúc là khi tìm thấy một người để cùng già đi"
         </p>
       </div>
 
-      {/* Center Area: Intentionally completely empty to let bride & groom's faces shine brightly! */}
-      <div className="flex-1 min-h-[180px] pointer-events-none"></div>
-
-      {/* Bottom Area of Hero: Gentle Call-to-Scroll Bar */}
+      {/* Bottom Controls */}
       <div className="relative z-10 pb-8 sm:pb-10 text-center flex flex-col items-center">
         {/* Slide indicator dots */}
         <div className="flex justify-center items-center gap-1.5 mb-3">
@@ -76,7 +76,7 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* Scroll prompt button */}
+        {/* Scroll button to Countdown & Events */}
         <a
           href="#countdown"
           className="inline-flex items-center gap-1.5 bg-black/40 hover:bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-xs text-white/90 transition-all hover:scale-105 active:scale-95 shadow-lg group"
