@@ -1,0 +1,35 @@
+name: CI/CD Pipeline - Wedding Website
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-verify:
+    name: Build & Verify Production Code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Test Build Production Assets
+        run: npm run build
+
+      - name: Success Notification
+        run: |
+          echo "✅ Production assets compiled successfully!"
+          echo "🚀 Vercel automatically deploys this commit to: https://tuan-huy-bich-phuong-4yu7.vercel.app"
