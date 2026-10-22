@@ -11,6 +11,7 @@ import VideoSection from './components/VideoSection';
 import Guestbook from './components/Guestbook';
 import GiftModal from './components/GiftModal';
 import MusicPlayer from './components/MusicPlayer';
+import FloatingGiftButton from './components/FloatingGiftButton';
 import Footer from './components/Footer';
 import MobileBottomNav from './components/MobileBottomNav';
 
@@ -25,10 +26,10 @@ export default function App() {
       {/* Top Navigation bar */}
       <Navbar onOpenGiftModal={() => setIsGiftModalOpen(true)} />
 
-      {/* Hero section (Faces clearly visible, no boxes blocking) */}
+      {/* Hero section (Faces clearly visible, couple name at circled area) */}
       <Hero />
 
-      {/* Wedding Date Display & Countdown Timer (Moved cleanly here) */}
+      {/* Wedding Date Display & Countdown Timer */}
       <WeddingCountdown />
 
       {/* Bride & Groom section */}
@@ -52,8 +53,11 @@ export default function App() {
       {/* Footer */}
       <Footer />
 
-      {/* Floating Music Player with native audio & YouTube links */}
+      {/* Floating Music Player (Bottom Right) */}
       <MusicPlayer />
+
+      {/* Floating Gift / Mừng Cưới Button (Bottom Left, directly opposite to Music Player) */}
+      <FloatingGiftButton onOpenGiftModal={() => setIsGiftModalOpen(true)} />
 
       {/* Mobile-Only Bottom Quick Action Bar */}
       <MobileBottomNav onOpenGiftModal={() => setIsGiftModalOpen(true)} />
