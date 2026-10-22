@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import PetalsCanvas from './components/PetalsCanvas';
 import Hero from './components/Hero';
+import WeddingCountdown from './components/WeddingCountdown';
 import Couple from './components/Couple';
 import LoveStory from './components/LoveStory';
 import WeddingEvents from './components/WeddingEvents';
@@ -24,8 +25,11 @@ export default function App() {
       {/* Top Navigation bar */}
       <Navbar onOpenGiftModal={() => setIsGiftModalOpen(true)} />
 
-      {/* Hero section */}
-      <Hero onOpenGiftModal={() => setIsGiftModalOpen(true)} />
+      {/* Hero section (Faces clearly visible, no boxes blocking) */}
+      <Hero />
+
+      {/* Wedding Date Display & Countdown Timer (Moved cleanly here) */}
+      <WeddingCountdown />
 
       {/* Bride & Groom section */}
       <Couple />
@@ -48,7 +52,7 @@ export default function App() {
       {/* Footer */}
       <Footer />
 
-      {/* Floating Music Player with YouTube links */}
+      {/* Floating Music Player with native audio & YouTube links */}
       <MusicPlayer />
 
       {/* Mobile-Only Bottom Quick Action Bar */}
