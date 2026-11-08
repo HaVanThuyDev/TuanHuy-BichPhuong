@@ -17,8 +17,8 @@ export default function WeddingEvents() {
   // Helper to generate Google Calendar link
   const createGoogleCalendarLink = (event) => {
     const isVuQuy = event.id === 'vu-quy';
-    const title = encodeURIComponent(`${event.title} - Tuấn Huy & Bích Phương`);
-    const details = encodeURIComponent(`Đám cưới Tuấn Huy & Bích Phương\nThời gian: ${event.time} ${event.date}\nĐịa điểm: ${event.locationName} - ${event.address}`);
+    const title = encodeURIComponent(`${event.title} - Tuấn Huy & Bích Phượng`);
+    const details = encodeURIComponent(`Đám cưới Tuấn Huy & Bích Phượng\nThời gian: ${event.time} ${event.date}\nĐịa điểm: ${event.locationName} - ${event.address}`);
     const location = encodeURIComponent(`${event.locationName}, ${event.address}`);
     
     // Dates formatted YYYYMMDDTHHmmssZ (Vietnam UTC+7)
@@ -168,12 +168,7 @@ export default function WeddingEvents() {
                   </div>
 
                   {/* Dresscode note */}
-                  {ev.dressCode && (
-                    <div className="mb-5 text-[11px] sm:text-xs text-stone-500 flex items-center gap-1.5 bg-amber-50/50 p-2.5 rounded-xl border border-amber-200/50">
-                      <Sparkles className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-                      <span><strong>Dress code:</strong> {ev.dressCode}</span>
-                    </div>
-                  )}
+                 
                 </div>
 
                 {/* Mobile-Friendly Action Buttons */}

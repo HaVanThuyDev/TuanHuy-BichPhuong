@@ -51,7 +51,7 @@ export default function VideoSection() {
             <iframe
               className="w-full h-full"
               src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
-              title="Tuấn Huy & Bích Phương Wedding Video"
+              title="Tuấn Huy & Bích Phượng Wedding Video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />

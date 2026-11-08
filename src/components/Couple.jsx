@@ -4,6 +4,8 @@ import { weddingData } from '../data/weddingData';
 
 export default function Couple() {
   const { groom, bride } = weddingData;
+  const groomPhone = groom.phone?.trim();
+  const bridePhone = bride.phone?.trim();
   const [activeMobileTab, setActiveMobileTab] = useState('all'); // 'all' | 'groom' | 'bride'
 
   return (
@@ -19,9 +21,8 @@ export default function Couple() {
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14 space-y-2">
           <div className="inline-flex items-center gap-2 text-rose-600 uppercase tracking-[0.2em] text-[11px] sm:text-xs font-semibold">
             <span className="w-6 h-[1px] bg-rose-400"></span>
-            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            
             <span>Cô Dâu & Chú Rể</span>
-            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
             <span className="w-6 h-[1px] bg-rose-400"></span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-serif font-bold text-stone-900 tracking-tight">
@@ -116,15 +117,17 @@ export default function Couple() {
               </div>
 
               {/* Call Groom Button */}
-              <div className="pt-4 mt-3 border-t border-stone-100 flex items-center justify-center sm:justify-start">
-                <a
-                  href={`tel:${groom.phone.replace(/\s+/g, '')}`}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-semibold px-5 py-2.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white shadow-md active:scale-95 transition-all"
-                >
-                  <Phone className="w-3.5 h-3.5" />
-                  <span>Gọi Chú Rể ({groom.phone})</span>
-                </a>
-              </div>
+              {groomPhone && (
+                <div className="pt-4 mt-3 border-t border-stone-100 flex items-center justify-center sm:justify-start">
+                  <a
+                    href={`tel:${groomPhone.replace(/\s+/g, '')}`}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-semibold px-5 py-2.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white shadow-md active:scale-95 transition-all"
+                  >
+                    <Phone className="w-3.5 h-3.5" />
+                    <span>Gọi Chú Rể ({groomPhone})</span>
+                  </a>
+                </div>
+              )}
             </div>
           )}
 
@@ -174,15 +177,17 @@ export default function Couple() {
               </div>
 
               {/* Call Bride Button */}
-              <div className="pt-4 mt-3 border-t border-stone-100 flex items-center justify-center sm:justify-start">
-                <a
-                  href={`tel:${bride.phone.replace(/\s+/g, '')}`}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-semibold px-5 py-2.5 rounded-full bg-amber-600 hover:bg-amber-700 text-white shadow-md active:scale-95 transition-all"
-                >
-                  <Phone className="w-3.5 h-3.5" />
-                  <span>Gọi Cô Dâu ({bride.phone})</span>
-                </a>
-              </div>
+              {bridePhone && (
+                <div className="pt-4 mt-3 border-t border-stone-100 flex items-center justify-center sm:justify-start">
+                  <a
+                    href={`tel:${bridePhone.replace(/\s+/g, '')}`}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-semibold px-5 py-2.5 rounded-full bg-amber-600 hover:bg-amber-700 text-white shadow-md active:scale-95 transition-all"
+                  >
+                    <Phone className="w-3.5 h-3.5" />
+                    <span>Gọi Cô Dâu ({bridePhone})</span>
+                  </a>
+                </div>
+              )}
             </div>
           )}
         </div>

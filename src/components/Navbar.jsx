@@ -44,7 +44,7 @@ export default function Navbar({ onOpenGiftModal }) {
             <span className={`transition-colors ${
               isScrolled ? 'text-rose-600' : 'text-white'
             }`}>
-              Bích Phương
+              Bích Phượng
             </span>
           </div>
         </a>

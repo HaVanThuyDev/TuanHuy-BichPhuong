@@ -26,7 +26,7 @@ export default function Hero() {
         >
           <img
             src={img}
-            alt="Tuấn Huy & Bích Phương Wedding Background"
+            alt="Tuấn Huy & Bích Phượng Wedding Background"
             className={`w-full h-full object-cover object-center ${
               idx === currentSlide ? 'animate-kenburns' : ''
             }`}
@@ -50,7 +50,7 @@ export default function Hero() {
         <h1 className="text-4xl xs:text-5xl sm:text-6xl font-cursive font-normal text-rose-50 text-shadow-lg tracking-wide leading-tight">
           Tuấn Huy
           <span className="inline-block mx-2.5 text-amber-300 font-serif text-2xl sm:text-4xl">&</span>
-          Bích Phương
+          Bích Phượng
         </h1>
 
         <p className="font-serif italic text-xs sm:text-sm text-stone-200 tracking-wider font-light mt-1.5 text-shadow">

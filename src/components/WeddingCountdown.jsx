@@ -40,9 +40,9 @@ export default function WeddingCountdown() {
       <div className="max-w-xl mx-auto px-4 text-center relative z-10 flex flex-col items-center">
         {/* Decorative Badge */}
         <div className="inline-flex items-center gap-1.5 text-rose-600 uppercase tracking-[0.2em] text-[11px] font-bold mb-3">
-          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+          
           <span>Thời Gian Trọng Đại</span>
-          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+          
         </div>
 
         {/* Wedding Date Display Card (Clean Luxury Design) */}

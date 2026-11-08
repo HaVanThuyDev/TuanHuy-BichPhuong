@@ -7,7 +7,7 @@ export default function Footer() {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'Tuấn Huy & Bích Phương - Happy Wedding',
+        title: 'Tuấn Huy & Bích Phượng - Happy Wedding',
         text: 'Trân trọng kính mời bạn đến chung vui cùng gia đình chúng mình!',
         url: window.location.href,
       }).catch(() => {});
@@ -33,7 +33,7 @@ export default function Footer() {
         </div>
 
         <h3 className="font-cursive text-3xl sm:text-5xl text-rose-200">
-          Tuấn Huy & Bích Phương
+          Tuấn Huy & Bích Phượng
         </h3>
 
         <p className="text-stone-300 text-xs sm:text-base font-light italic max-w-lg mx-auto leading-relaxed px-2">
@@ -70,7 +70,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-6 border-t border-stone-800 text-[11px] text-stone-500">
-          <p>© 2026 Tuấn Huy & Bích Phương • Trân trọng kính mời</p>
+          <p>© 2026 Tuấn Huy & Bích Phượng • Trân trọng kính mời</p>
         </div>
       </div>
     </footer>

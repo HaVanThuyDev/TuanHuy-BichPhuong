@@ -1,38 +1,36 @@
 export const weddingData = {
   groom: {
     name: "Tuấn Huy",
-    fullName: "Nguyễn Tuấn Huy",
+    fullName: " Tuấn Huy",
     title: "Chú Rể",
-    father: "Nguyễn Văn Thắng",
-    mother: "Lê Thị Hạnh",
-    address: "Xã Kim Chung, Huyện Hoài Đức, Hà Nội",
-    phone: "0988 123 456",
+    father: "Phạm Văn Quang",
+    mother: "Lê Thị Thúy",
+    address: "Cốc Mốc , Đồng Lương, Thanh Hóa",
     avatar: "/img/photo-4.jpg",
     quote: "Gặp được em là điều may mắn nhất trong cuộc đời anh. Cảm ơn em đã đồng ý cùng anh đi qua những năm tháng thanh xuân và trọn đời về sau.",
     facebook: "https://facebook.com",
     bank: {
-      bankName: "MB Bank (Ngân hàng Quân Đội)",
-      accountNumber: "0988123456",
-      accountHolder: "NGUYEN TUAN HUY",
-      qrCodeUrl: "https://api.vietqr.io/image/970422-0988123456-compact2.png?amount=0&addInfo=Mung%20cuoi%20Tuan%20Huy&accountName=NGUYEN%20TUAN%20HUY"
+      bankName: "VIETTINBANK",
+      accountNumber: "107883880855",
+      accountHolder: "PHAM TUAN HUY",
+      qrCodeUrl: " /img/QRHUY.png"
     }
   },
   bride: {
-    name: "Bích Phương",
-    fullName: "Trần Bích Phương",
+    name: " Bích Phượng",
+    fullName: " Bích Phượng",
     title: "Cô Dâu",
-    father: "Trần Văn Nam",
-    mother: "Vũ Thị Mai",
-    address: "Phường Khương Đình, Quận Thanh Xuân, Hà Nội",
-    phone: "0977 654 321",
+    father: "Hà Văn Sự",
+    mother: "Hà Thị Dum",
+    address: "Sơn Thủy, Thủy Sơn, Thanh Hóa",
     avatar: "/img/photo-5.jpg",
     quote: "Từ giây phút này trở đi, dù bão giông hay nắng ấm, tay em sẽ luôn nằm trọn trong tay anh. Hạnh phúc giản đơn là có anh kề bên mỗi ngày.",
     facebook: "https://facebook.com",
     bank: {
-      bankName: "Vietcombank",
-      accountNumber: "998877665544",
-      accountHolder: "TRAN BICH PHUONG",
-      qrCodeUrl: "https://api.vietqr.io/image/970436-998877665544-compact2.png?amount=0&addInfo=Mung%20cuoi%20Bich%20Phuong&accountName=TRAN%20BICH%20PHUONG"
+      bankName: "Hàng Hải MSB",
+      accountNumber: "80001913705",
+      accountHolder: "HA THI BICH PHUONG",
+      qrCodeUrl: "/img/QRPHUONG.png"
     }
   },
   weddingDate: "2026-11-22T11:00:00",
@@ -57,8 +55,7 @@ export const weddingData = {
       time: "09:00",
       date: "Thứ Bảy, 21/11/2026",
       lunarDate: "13/10 Bính Ngọ",
-      locationName: "Tư Gia Nhà Gái",
-      address: "Số 68 Phố Vũ Tông Phan, Phường Khương Đình, Quận Thanh Xuân, Hà Nội",
+      address: "Sơn Thủy, Thủy Sơn, Thanh HóaSơn Thủy, Thủy Sơn, Thanh Hóa",
       mapUrl: "https://maps.google.com/?q=68+Vũ+Tông+Phan+Thanh+Xuân+Hà+Nội",
       mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.8!2d105.817!3d20.995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDU5JzQyLjAiTiAxMDXCsDQ5JzAxLjIiRQ!5e0!3m2!1svi!2s!4v1",
       schedule: [
@@ -74,7 +71,7 @@ export const weddingData = {
       time: "11:00",
       date: "Chủ Nhật, 22/11/2026",
       lunarDate: "14/10 Bính Ngọ",
-      locationName: "Trung Tâm Tiệc Cưới Trống Đồng Palace",
+      locationName: "Cốc Mốc , Đồng Lương, Thanh Hóa",
       address: "Đường Mễ Trì, Quận Nam Từ Liêm, Thành phố Hà Nội",
       mapUrl: "https://maps.google.com/?q=Trống+Đồng+Palace+Mễ+Trì+Hà+Nội",
       mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.2!2d105.782!3d21.012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDAwJzQzLjIiTiAxMDXCsDQ2JzU1LjIiRQ!5e0!3m2!1svi!2s!4v1",
@@ -121,7 +118,7 @@ export const weddingData = {
       src: `/img/photo-${id}.jpg`,
       title: `Khoảnh khắc ngọt ngào #${id}`,
       category,
-      alt: `Ảnh cưới Tuấn Huy & Bích Phương ${id}`
+      alt: `Ảnh cưới Tuấn Huy & Bích Phượng ${id}`
     };
   }),
   youtubePresets: [
@@ -147,8 +144,8 @@ export const weddingData = {
   defaultWishes: [
     {
       id: 1,
-      name: "Gia đình Bác Hải",
-      wish: "Chúc hai cháu Tuấn Huy và Bích Phương trăm năm hạnh phúc, tình cảm sắt son, đầu bạc răng long!",
+      name: "Anh Thủy",
+      wish: "Chúc hai em trăm năm hạnh phúc, tình cảm sắt son, đầu bạc răng long!",
       time: "Vừa xong"
     },
     {

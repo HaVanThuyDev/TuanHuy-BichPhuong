@@ -167,7 +167,7 @@ export default function Guestbook() {
                   required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Gửi gắm lời chúc tốt đẹp nhất tới Tuấn Huy & Bích Phương..."
+                  placeholder="Gửi gắm lời chúc tốt đẹp nhất tới Tuấn Huy & Bích Phượng..."
                   className="w-full text-base sm:text-sm p-3 rounded-xl border border-stone-200 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 bg-stone-50/50 resize-none"
                 />
               </div>
